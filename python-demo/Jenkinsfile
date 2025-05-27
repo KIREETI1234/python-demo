@@ -6,6 +6,16 @@ pipeline {
     }
 
     stages {
+        stage('Install OS Dependencies') {
+            steps {
+                sh '''
+                echo "Installing python3-venv if missing..."
+                sudo apt-get update
+                sudo apt-get install -y python3-venv python3-pip
+                '''
+            }
+        }
+
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/arjunkoppineni/python-demo.git'
